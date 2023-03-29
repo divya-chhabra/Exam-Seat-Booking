@@ -25,6 +25,7 @@ const SeatsList = ({user}) => {
     "L",
     "M",
   ];
+
   var colNames = [1, 2, 3, 4, 5, 6];
 
   const inEligibleSeats = useSelector(store => store.seatsInfo.inEligibleSeats)
@@ -43,17 +44,20 @@ const SeatsList = ({user}) => {
       <h2>Select a Seat</h2>
       <ul className="flex flex-wrap w-52">
         {rowNames.map((row, index) => {
+          const notForFemales = row == "M" && user.gender == 'Female';
+          const notforAdults =  ["H","I","J","K","L","M"].includes(row) && user.age >= 30;
           return (
             <>
               {colNames.map((col, index) => {
                 var seatNum = row+col
+                const notForTeenagers = user.age <= 20 && (col==1 || col==6)
                 return col % 3 === 0 ? (
                   <>
-                    <Seat seatNum={seatNum} booked={inEligibleSeats.includes(seatNum)} onClick={handleBooking} />
+                    <Seat seatNum={seatNum} booked={inEligibleSeats.includes(seatNum) || notForFemales || notForTeenagers || notforAdults} onClick={handleBooking} />
                     <div className="w-3 h-3"></div>
                   </>
                 ) : (
-                  <Seat seatNum={seatNum} booked={inEligibleSeats.includes(seatNum)} onClick={handleBooking}/>
+                  <Seat disabled={true} seatNum={seatNum} booked={inEligibleSeats.includes(seatNum) || notForFemales || notForTeenagers || notforAdults} onClick={handleBooking}/>
                 );
               })}
               <br />

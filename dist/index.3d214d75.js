@@ -38660,10 +38660,12 @@ const ExamForm = ({ id  })=>{
                                 type: "text",
                                 ref: nameNode,
                                 value: user.name,
-                                onChange: (e)=>setUser({
+                                onChange: (e)=>{
+                                    setUser({
                                         ...user,
                                         name: e.target.value
-                                    })
+                                    });
+                                }
                             }, void 0, false, {
                                 fileName: "src/components/ExamForm.jsx",
                                 lineNumber: 54,
@@ -38962,48 +38964,59 @@ const SeatsList = ({ user  })=>{
                 children: "Select a Seat"
             }, void 0, false, {
                 fileName: "src/components/SeatsList.jsx",
-                lineNumber: 43,
+                lineNumber: 44,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                 className: "flex flex-wrap w-52",
                 children: rowNames.map((row, index)=>{
+                    const notForFemales = row == "M" && user.gender == "Female";
+                    const notforAdults = [
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M"
+                    ].includes(row) && user.age >= 30;
                     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                         children: [
                             colNames.map((col, index)=>{
                                 var seatNum = row + col;
+                                const notForTeenagers = user.age <= 20 && (col == 1 || col == 6);
                                 return col % 3 === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _seatDefault.default), {
                                             seatNum: seatNum,
-                                            booked: inEligibleSeats.includes(seatNum),
+                                            booked: inEligibleSeats.includes(seatNum) || notForFemales || notForTeenagers || notforAdults,
                                             onClick: handleBooking
                                         }, void 0, false, {
                                             fileName: "src/components/SeatsList.jsx",
-                                            lineNumber: 52,
+                                            lineNumber: 56,
                                             columnNumber: 21
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                             className: "w-3 h-3"
                                         }, void 0, false, {
                                             fileName: "src/components/SeatsList.jsx",
-                                            lineNumber: 53,
+                                            lineNumber: 57,
                                             columnNumber: 21
                                         }, undefined)
                                     ]
                                 }, void 0, true) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _seatDefault.default), {
+                                    disabled: true,
                                     seatNum: seatNum,
-                                    booked: inEligibleSeats.includes(seatNum),
+                                    booked: inEligibleSeats.includes(seatNum) || notForFemales || notForTeenagers || notforAdults,
                                     onClick: handleBooking
                                 }, void 0, false, {
                                     fileName: "src/components/SeatsList.jsx",
-                                    lineNumber: 56,
+                                    lineNumber: 60,
                                     columnNumber: 19
                                 }, undefined);
                             }),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                 fileName: "src/components/SeatsList.jsx",
-                                lineNumber: 59,
+                                lineNumber: 63,
                                 columnNumber: 15
                             }, undefined)
                         ]
@@ -39011,13 +39024,13 @@ const SeatsList = ({ user  })=>{
                 })
             }, void 0, false, {
                 fileName: "src/components/SeatsList.jsx",
-                lineNumber: 44,
+                lineNumber: 45,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/SeatsList.jsx",
-        lineNumber: 42,
+        lineNumber: 43,
         columnNumber: 5
     }, undefined);
 };
