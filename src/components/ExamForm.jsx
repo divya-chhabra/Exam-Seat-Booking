@@ -77,7 +77,7 @@ const ExamForm = ({ id }) => {
               type="text"
               value={user.age}
               ref={ageNode}
-              onChange={(e) => setUser({ ...user, age: parseInt(e.target.value )})}
+              onChange={(e) => setUser({ ...user, age:e.target.value})}
             />
           </div>
         </div>
