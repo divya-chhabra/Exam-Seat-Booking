@@ -38598,6 +38598,31 @@ const ExamForm = ({ id  })=>{
             ...user,
             examId: id
         }), []);
+    const errRef = (0, _react.useRef)();
+    const ageNode = (0, _react.useRef)();
+    const nameNode = (0, _react.useRef)();
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    const handleValidations = ()=>{
+        errRef.current.innerHTML = "";
+        if (user.name == "") {
+            errRef.current.innerHTML = "Please enter your name";
+            nameNode.current.focus();
+            return;
+        }
+        if (user.age == "") {
+            errRef.current.innerHTML = "Please enter your age";
+            ageNode.current.focus();
+            return;
+        }
+        if (isNaN(parseInt(user.age))) {
+            errRef.current.innerHTML = "Please enter your proper age in number";
+            ageNode.current.focus();
+            return;
+        }
+        navigate("/booking", {
+            state: user
+        });
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
             class: "w-full max-w-sm py-3 px-6 shadow-sm border",
@@ -38607,8 +38632,8 @@ const ExamForm = ({ id  })=>{
                     children: " Register for Exam"
                 }, void 0, false, {
                     fileName: "src/components/ExamForm.jsx",
-                    lineNumber: 13,
-                    columnNumber: 11
+                    lineNumber: 45,
+                    columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     className: "mb-6",
@@ -38619,12 +38644,12 @@ const ExamForm = ({ id  })=>{
                                 children: "Name"
                             }, void 0, false, {
                                 fileName: "src/components/ExamForm.jsx",
-                                lineNumber: 17,
+                                lineNumber: 49,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/ExamForm.jsx",
-                            lineNumber: 16,
+                            lineNumber: 48,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38633,6 +38658,7 @@ const ExamForm = ({ id  })=>{
                                 className: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500",
                                 id: "name",
                                 type: "text",
+                                ref: nameNode,
                                 value: user.name,
                                 onChange: (e)=>setUser({
                                         ...user,
@@ -38640,18 +38666,18 @@ const ExamForm = ({ id  })=>{
                                     })
                             }, void 0, false, {
                                 fileName: "src/components/ExamForm.jsx",
-                                lineNumber: 24,
+                                lineNumber: 54,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/ExamForm.jsx",
-                            lineNumber: 23,
+                            lineNumber: 53,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/ExamForm.jsx",
-                    lineNumber: 15,
+                    lineNumber: 47,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38663,12 +38689,12 @@ const ExamForm = ({ id  })=>{
                                 children: "Age"
                             }, void 0, false, {
                                 fileName: "src/components/ExamForm.jsx",
-                                lineNumber: 38,
+                                lineNumber: 69,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/ExamForm.jsx",
-                            lineNumber: 37,
+                            lineNumber: 68,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38677,24 +38703,34 @@ const ExamForm = ({ id  })=>{
                                 id: "age",
                                 type: "text",
                                 value: user.age,
+                                ref: ageNode,
                                 onChange: (e)=>setUser({
                                         ...user,
                                         age: e.target.value
                                     })
                             }, void 0, false, {
                                 fileName: "src/components/ExamForm.jsx",
-                                lineNumber: 46,
+                                lineNumber: 74,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/ExamForm.jsx",
-                            lineNumber: 45,
+                            lineNumber: 73,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/ExamForm.jsx",
-                    lineNumber: 36,
+                    lineNumber: 67,
+                    columnNumber: 9
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    id: "errMessage",
+                    className: "text-red-600 py-2",
+                    ref: errRef
+                }, void 0, false, {
+                    fileName: "src/components/ExamForm.jsx",
+                    lineNumber: 85,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38706,12 +38742,12 @@ const ExamForm = ({ id  })=>{
                                 children: "Gender"
                             }, void 0, false, {
                                 fileName: "src/components/ExamForm.jsx",
-                                lineNumber: 60,
+                                lineNumber: 91,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/ExamForm.jsx",
-                            lineNumber: 59,
+                            lineNumber: 90,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38729,7 +38765,7 @@ const ExamForm = ({ id  })=>{
                                         children: "Male"
                                     }, void 0, false, {
                                         fileName: "src/components/ExamForm.jsx",
-                                        lineNumber: 71,
+                                        lineNumber: 102,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -38737,7 +38773,7 @@ const ExamForm = ({ id  })=>{
                                         children: "Female"
                                     }, void 0, false, {
                                         fileName: "src/components/ExamForm.jsx",
-                                        lineNumber: 72,
+                                        lineNumber: 103,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -38745,65 +38781,64 @@ const ExamForm = ({ id  })=>{
                                         children: "Other"
                                     }, void 0, false, {
                                         fileName: "src/components/ExamForm.jsx",
-                                        lineNumber: 73,
+                                        lineNumber: 104,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/ExamForm.jsx",
-                                lineNumber: 68,
+                                lineNumber: 96,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/ExamForm.jsx",
-                            lineNumber: 67,
+                            lineNumber: 95,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/ExamForm.jsx",
-                    lineNumber: 58,
+                    lineNumber: 89,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     class: "md:flex md:items-center",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
-                            fileName: "src/components/ExamForm.jsx",
-                            lineNumber: 79,
-                            columnNumber: 11
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                                to: "/booking/",
-                                state: user,
-                                className: "shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded",
-                                children: "Select Seat"
-                            }, void 0, false, {
-                                fileName: "src/components/ExamForm.jsx",
-                                lineNumber: 82,
-                                columnNumber: 13
-                            }, undefined)
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                            type: "button",
+                            onClick: ()=>{
+                                handleValidations();
+                            },
+                            className: "shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded",
+                            children: "Select Seat"
                         }, void 0, false, {
                             fileName: "src/components/ExamForm.jsx",
-                            lineNumber: 80,
-                            columnNumber: 11
+                            lineNumber: 111,
+                            columnNumber: 13
                         }, undefined)
-                    ]
-                }, void 0, true, {
+                    }, void 0, false, {
+                        fileName: "src/components/ExamForm.jsx",
+                        lineNumber: 110,
+                        columnNumber: 11
+                    }, undefined)
+                }, void 0, false, {
                     fileName: "src/components/ExamForm.jsx",
-                    lineNumber: 78,
+                    lineNumber: 109,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/ExamForm.jsx",
-            lineNumber: 11,
-            columnNumber: 6
+            lineNumber: 44,
+            columnNumber: 7
         }, undefined)
     }, void 0, false);
 };
-_s(ExamForm, "Tt9Gtt//qcFn3pL8s+965B0FAk8=");
+_s(ExamForm, "fDnNDF6Z5rvt+tlanx7jZFVDbKM=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
 _c = ExamForm;
 exports.default = ExamForm;
 var _c;
